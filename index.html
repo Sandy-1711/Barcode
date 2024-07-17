@@ -1,32 +1,52 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Barcode Generator</title>
-  <script src="https://cdn.jsdelivr.net/npm/bwip-js@2.0.9/dist/bwip-js-min.js"></script>
-</head>
-<body>
-  <canvas id="barcode"></canvas>
-  <script>
-    // Function to generate barcode
-    function generateBarcode(text) {
-      try {
-        bwipjs.toCanvas('barcode', {
-          bcid: 'code128', // Barcode type
-          text: text,      // Text to encode
-          scale: 3,        // 3x scaling factor
-          height: 10,      // Bar height, in millimeters
-          includetext: false, // Show human-readable text
-          textxalign: 'center', // Always good to set this
-        });
-      } catch (e) {
-        console.error(e);
-      }
+  <head>
+    <title>Barcode Generator</title>
+    <script src="https://cdn.jsdelivr.net/npm/bwip-js@2.0.9/dist/bwip-js-min.js"></script>
+  </head>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      margin: 20px;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      width: 100vw;
     }
+    canvas {
+      display: block;
+      margin: 0;
+      width: 90%;
+      height: 80%;
+    }
+  </style>
+  <body>
+    <canvas id="barcode"></canvas>
+    <script>
+      // Function to generate barcode
+      function generateBarcode(text) {
+        try {
+          bwipjs.toCanvas("barcode", {
+            bcid: "code128", // Barcode type
+            text: text, // Text to encode
+            scale: 5, // 3x scaling factor
+            height: 10, // Bar height, in millimeters
+            includetext: false, // Show human-readable text
+            textxalign: "center", // Always good to set this
+          });
+        } catch (e) {
+          console.error(e);
+        }
+      }
 
-    // Get the text parameter from URL
-    const urlParams = new URLSearchParams(window.location.search);
-    const text = urlParams.get('text');
-    generateBarcode(text || '123456789012');
-  </script>
-</body>
+      // Get the text parameter from URL
+      const urlParams = new URLSearchParams(window.location.search);
+      const text = urlParams.get("text");
+      generateBarcode(text || "123456789012");
+    </script>
+  </body>
 </html>
